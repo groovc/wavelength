@@ -6,6 +6,35 @@ Wavelength is a mobile-first podcast discovery app. The project has a working mo
 
 Your job is to **build the app and get the tests passing** by using your preferred AI coding assistant to generate the implementations.
 
+## Rules
+
+- You **should** use any AI coding assistant
+- You **must** edit both `SPEC.md` and `PROMPT.md` (we review your changes to both)
+- You **should not** hand-write the page implementations — use your AI tool
+- You **may** make minor manual fixes, but the bulk should be AI-generated
+- You **should not** modify test files
+- Time limit: **1 hour**
+
+## What We're Evaluating
+
+### Part 1
+- **Product thinking**: Did you make reasonable design decisions for a mobile podcast app?
+- **Specification skill**: Is your updated SPEC.md clear and complete enough for an AI to build from?
+- **AI guidance**: Does your PROMPT.md give effective instructions?
+- **Result quality**: Does the generated app look and feel like a real mobile app?
+
+### Part 2
+- **Feature specification**: Can you translate a feature request into spec updates?
+- **Incremental guidance**: Can you extend your AI instructions to add new capabilities?
+- **Technical judgment**: State management (player), API integration (search) — do the solutions feel right?
+
+## Tips
+
+- **Part 1 is open-ended.** There's no single right answer for the UI. Make decisions, document them in the spec, and guide your AI.
+- **Read the test files for Part 2.** They tell you exactly what the acceptance criteria are. The issue files also list specific test IDs needed.
+- **The tests use flexible selectors** — they look for ARIA roles, text content, and placeholder text rather than hardcoded test IDs (with a few exceptions noted in each issue).
+- **Think about what belongs in SPEC.md vs. PROMPT.md.** The spec defines *what* the product does. The prompt tells the AI *how* to build it.
+
 ## The Two-Part Structure
 
 ### Part 1: Build the App (~30 min)
@@ -60,28 +89,6 @@ npm run test:history    # Run Stretch Goal S1 tests only
 npm run test:favorites  # Run Stretch Goal S2 tests only
 ```
 
-## What We're Evaluating
-
-### Part 1
-- **Product thinking**: Did you make reasonable design decisions for a mobile podcast app?
-- **Specification skill**: Is your updated SPEC.md clear and complete enough for an AI to build from?
-- **AI guidance**: Does your PROMPT.md give effective instructions?
-- **Result quality**: Does the generated app look and feel like a real mobile app?
-
-### Part 2
-- **Feature specification**: Can you translate a feature request into spec updates?
-- **Incremental guidance**: Can you extend your AI instructions to add new capabilities?
-- **Technical judgment**: State management (player), API integration (search) — do the solutions feel right?
-
-## Rules
-
-- You **may** use any AI coding assistant
-- You **must** edit both `SPEC.md` and `PROMPT.md` (we review your changes to both)
-- You **should not** hand-write the page implementations — use your AI tool
-- You **may** make minor manual fixes, but the bulk should be AI-generated
-- You **should not** modify test files
-- Time limit: **1 hour**
-
 ## File Overview
 
 | File | Purpose | Edit? |
@@ -95,10 +102,3 @@ npm run test:favorites  # Run Stretch Goal S2 tests only
 | `src/api/client.ts` | API client | Already complete |
 | `src/types/index.ts` | TypeScript types | Already complete |
 | `server/` | Mock API | Do not modify |
-
-## Tips
-
-- **Part 1 is open-ended.** There's no single right answer for the UI. Make decisions, document them in the spec, and guide your AI.
-- **Read the test files for Part 2.** They tell you exactly what the acceptance criteria are. The issue files also list specific test IDs needed.
-- **The tests use flexible selectors** — they look for ARIA roles, text content, and placeholder text rather than hardcoded test IDs (with a few exceptions noted in each issue).
-- **Think about what belongs in SPEC.md vs. PROMPT.md.** The spec defines *what* the product does. The prompt tells the AI *how* to build it.
