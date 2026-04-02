@@ -13,7 +13,8 @@
     "test:smoke": "vitest run smoke",
     "test:search": "vitest run search",
     "test:player": "vitest run player",
-    "test:history": "vitest run history"
+    "test:history": "vitest run history",
+    "test:favorites": "vitest run favorites"
   },
   "dependencies": {
     "better-sqlite3": "^12.8.0",
