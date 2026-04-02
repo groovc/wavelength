@@ -34,8 +34,10 @@ Two feature issues need to be implemented:
 | # | Issue | Test File | Tests |
 |---|-------|-----------|-------|
 | S1 | [Listening History](/.github/ISSUES/stretch-1-listening-history.md) | `src/__tests__/history.test.tsx` | 6 |
+| S2 | [Favorites](https://github.com/groovc/wavelength/issues/4) | `src/__tests__/favorites.test.tsx` | 6 |
 
-This is a **full-stack** stretch goal: add SQLite database queries (with JOINs), API endpoints, and a "Continue Listening" frontend component. Demonstrates backend spec-writing skills in addition to frontend.
+- **S1** is a **full-stack** stretch goal: add SQLite database queries (with JOINs), API endpoints, and a "Continue Listening" frontend component. Demonstrates backend spec-writing skills in addition to frontend.
+- **S2** is a **frontend-only** stretch goal: use `localStorage` to save favorite podcasts and display a "My Library" section on the home page.
 
 For each issue:
 1. Read the issue and its test file
@@ -54,7 +56,8 @@ npm test             # Run all tests
 npm run test:smoke   # Run Part 1 tests only
 npm run test:search  # Run Part 2, Issue 1 tests only
 npm run test:player  # Run Part 2, Issue 2 tests only
-npm run test:history # Run Stretch Goal tests only
+npm run test:history    # Run Stretch Goal S1 tests only
+npm run test:favorites  # Run Stretch Goal S2 tests only
 ```
 
 ## What We're Evaluating
