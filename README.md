@@ -35,6 +35,20 @@ Your job is to **build the app and get the tests passing** by using your preferr
 - **The tests use flexible selectors** — they look for ARIA roles, text content, and placeholder text rather than hardcoded test IDs (with a few exceptions noted in each issue).
 - **Think about what belongs in SPEC.md vs. PROMPT.md.** The spec defines *what* the product does. The prompt tells the AI *how* to build it.
 
+## Setup
+
+```bash
+npm install
+npm run dev:server   # Start the mock API on port 3001
+npm run dev:client   # Start the Vite dev server (optional, for visual review)
+npm test             # Run all tests
+npm run test:smoke   # Run Part 1 tests only
+npm run test:search  # Run Part 2, Issue 1 tests only
+npm run test:player  # Run Part 2, Issue 2 tests only
+npm run test:history    # Run Stretch Goal S1 tests only
+npm run test:favorites  # Run Stretch Goal S2 tests only
+```
+
 ## The Two-Part Structure
 
 ### Part 1: Build the App (~30 min)
@@ -74,20 +88,6 @@ For each issue:
 3. Update `PROMPT.md` with build guidance for your AI
 4. Use your AI to implement the feature
 5. Run the feature's tests to verify
-
-## Setup
-
-```bash
-npm install
-npm run dev:server   # Start the mock API on port 3001
-npm run dev:client   # Start the Vite dev server (optional, for visual review)
-npm test             # Run all tests
-npm run test:smoke   # Run Part 1 tests only
-npm run test:search  # Run Part 2, Issue 1 tests only
-npm run test:player  # Run Part 2, Issue 2 tests only
-npm run test:history    # Run Stretch Goal S1 tests only
-npm run test:favorites  # Run Stretch Goal S2 tests only
-```
 
 ## File Overview
 
