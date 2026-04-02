@@ -11,6 +11,7 @@ describe('Stretch Goal — Issue 4: Favorites', () => {
   })
 
   describe('Favorite Toggle', () => {
+    // This test is complete — it verifies a toggle button exists on the detail page.
     it('shows a favorite toggle button on the podcast detail page', async () => {
       renderApp({ route: '/podcasts/pod-1' })
 
@@ -22,6 +23,10 @@ describe('Stretch Goal — Issue 4: Favorites', () => {
       )
     })
 
+    // TODO: Candidate must write assertions.
+    // Verify that clicking the favorite button persists the podcast to localStorage.
+    // Think about: What key should it be stored under? What data needs to be stored
+    // so the home page can render a card without an extra API call?
     it('adds the podcast to localStorage when the favorite button is clicked', async () => {
       const user = userEvent.setup()
       renderApp({ route: '/podcasts/pod-1' })
@@ -32,12 +37,17 @@ describe('Stretch Goal — Issue 4: Favorites', () => {
 
       await user.click(screen.getByTestId('favorite-toggle'))
 
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
-      expect(stored).toHaveLength(1)
-      expect(stored[0].id).toBe('pod-1')
-      expect(stored[0].title).toBe('Byte Talk')
+      // ✅ TODO: Assert that localStorage now contains the favorited podcast.
+      //    - Parse the stored value from localStorage using STORAGE_KEY
+      //    - Verify it contains exactly one entry
+      //    - Verify the entry has the correct podcast id and title
+
     })
 
+    // TODO: Candidate must write assertions.
+    // Verify that clicking the favorite button a second time removes the podcast.
+    // The toggle mechanic is fundamental — make sure localStorage reflects the state
+    // after each click.
     it('removes the podcast from localStorage when clicked again (toggle)', async () => {
       const user = userEvent.setup()
       renderApp({ route: '/podcasts/pod-1' })
@@ -46,19 +56,16 @@ describe('Stretch Goal — Issue 4: Favorites', () => {
         expect(screen.getByTestId('favorite-toggle')).toBeInTheDocument()
       })
 
-      // Click to favorite
-      await user.click(screen.getByTestId('favorite-toggle'))
-      expect(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')).toHaveLength(1)
+      // ✅ TODO: Click the favorite button twice and verify the toggle behavior.
+      //    - After the first click, localStorage should have 1 entry
+      //    - After the second click, localStorage should have 0 entries
 
-      // Click again to unfavorite
-      await user.click(screen.getByTestId('favorite-toggle'))
-      expect(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')).toHaveLength(0)
     })
   })
 
   describe('My Library Section', () => {
+    // This test is complete — it verifies the section appears when favorites exist.
     it('shows a "My Library" section on the home page when there are favorites', async () => {
-      // Pre-populate localStorage with a favorite
       localStorage.setItem(
         STORAGE_KEY,
         JSON.stringify([
@@ -85,51 +92,28 @@ describe('Stretch Goal — Issue 4: Favorites', () => {
       )
     })
 
+    // TODO: Candidate must write setup AND assertions.
+    // Pre-populate localStorage with a different favorited podcast, then verify
+    // its title appears on the home page. This tests that the My Library section
+    // actually renders data from localStorage, not just a hardcoded heading.
     it('displays favorited podcast titles in the My Library section', async () => {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify([
-          {
-            id: 'pod-3',
-            title: 'The Funny Hour',
-            author: 'Marcus Webb',
-            description: 'Stand-up comedians join Marcus',
-            category: 'Comedy',
-            imageUrl: 'https://placehold.co/300x300/f59e0b/white?text=TFH',
-            episodeCount: 203,
-            rating: 4.9,
-          },
-        ]),
-      )
+      // ✅ TODO: Set up localStorage with a favorited podcast (pick any from the fixture data)
+      //    then render the home page and verify the podcast title appears.
+      //    Hint: The My Library heading should be present, and the podcast title
+      //    should appear at least once on the page.
 
-      renderApp({ route: '/' })
-
-      await waitFor(
-        () => {
-          expect(screen.getByText(/my library/i)).toBeInTheDocument()
-        },
-        { timeout: 5000 },
-      )
-
-      // The favorited podcast title should appear in the library section
-      const funnyHourMatches = screen.getAllByText(/The Funny Hour/i)
-      expect(funnyHourMatches.length).toBeGreaterThan(0)
     })
 
+    // TODO: Candidate must write assertions.
+    // Verify that the My Library section does NOT appear when localStorage is empty.
+    // This is the inverse of the test above — it ensures conditional rendering works.
     it('does not show "My Library" when there are no favorites', async () => {
       renderApp({ route: '/' })
 
-      // Wait for the page to load
-      await waitFor(
-        () => {
-          const matches = screen.getAllByText(/Byte Talk/i)
-          expect(matches.length).toBeGreaterThan(0)
-        },
-        { timeout: 5000 },
-      )
+      // ✅ TODO: Wait for the home page to finish loading (check for any podcast title),
+      //    then assert that "my library" text is NOT present on the page.
+      //    Hint: Use queryByText (not getByText) since it returns null instead of throwing.
 
-      // My Library should not be present
-      expect(screen.queryByText(/my library/i)).not.toBeInTheDocument()
     })
   })
 })

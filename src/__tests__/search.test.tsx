@@ -4,6 +4,21 @@ import userEvent from '@testing-library/user-event'
 import { renderApp } from './test-utils'
 
 describe('Part 2 — Issue 1: Search', () => {
+  it('has a link to the search page from the home page', async () => {
+    renderApp({ route: '/' })
+
+    await waitFor(
+      () => {
+        const searchLink = screen.getAllByRole('link').find((link) => {
+          const href = link.getAttribute('href')
+          return href === '/search'
+        })
+        expect(searchLink).toBeTruthy()
+      },
+      { timeout: 5000 },
+    )
+  })
+
   it('renders a search input on /search', async () => {
     renderApp({ route: '/search' })
 
