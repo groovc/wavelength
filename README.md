@@ -1,4 +1,4 @@
-# Wavelength — Senior Engineer Exercise
+# Wavelength — Exercise
 
 ## What is this?
 
