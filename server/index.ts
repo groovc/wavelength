@@ -8,10 +8,15 @@ import {
   getEpisodeWithPodcast,
   searchContent,
 } from './data.js'
+import { getDatabase } from './db.js'
 
 const app = express()
 app.use(cors())
 app.use(express.json())
+
+// Initialize SQLite database (seeds podcasts + episodes tables)
+const db = getDatabase()
+console.log('SQLite database initialized')
 
 // GET /api/podcasts — list all, optional category filter
 app.get('/api/podcasts', (req, res) => {
@@ -63,6 +68,20 @@ app.get('/api/search', (req, res) => {
   }
   res.json(searchContent(q, category))
 })
+
+// ============================================================
+// Listening History endpoints (Stretch Goal — Issue #3)
+// These endpoints use the SQLite database. The listening_history
+// table is already created by db.ts. Candidates must implement
+// the POST and GET /api/history endpoints with proper JOINs.
+// ============================================================
+
+// POST /api/history — upsert listening progress
+// Expected body: { episodeId: string, podcastId: string, progress: number, completed?: boolean }
+// TODO: Candidates implement this endpoint
+
+// GET /api/history — get listening history with episode + podcast details (JOIN)
+// TODO: Candidates implement this endpoint
 
 const PORT = 3001
 app.listen(PORT, () => {

@@ -29,6 +29,14 @@ Two feature issues need to be implemented:
 | 1 | [Search](/.github/ISSUES/issue-1-search.md) | `src/__tests__/search.test.tsx` | 5 |
 | 2 | [Now Playing](/.github/ISSUES/issue-2-now-playing.md) | `src/__tests__/player.test.tsx` | 6 |
 
+### Stretch Goal (if time permits)
+
+| # | Issue | Test File | Tests |
+|---|-------|-----------|-------|
+| S1 | [Listening History](/.github/ISSUES/stretch-1-listening-history.md) | `src/__tests__/history.test.tsx` | 6 |
+
+This is a **full-stack** stretch goal: add SQLite database queries (with JOINs), API endpoints, and a "Continue Listening" frontend component. Demonstrates backend spec-writing skills in addition to frontend.
+
 For each issue:
 1. Read the issue and its test file
 2. Update `SPEC.md` with the feature's product requirements
@@ -46,6 +54,7 @@ npm test             # Run all tests
 npm run test:smoke   # Run Part 1 tests only
 npm run test:search  # Run Part 2, Issue 1 tests only
 npm run test:player  # Run Part 2, Issue 2 tests only
+npm run test:history # Run Stretch Goal tests only
 ```
 
 ## What We're Evaluating
