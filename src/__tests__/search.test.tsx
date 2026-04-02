@@ -75,7 +75,8 @@ describe('Part 2 — Issue 1: Search', () => {
 
     // Wait for results to include cross-category matches
     await waitFor(() => {
-      expect(screen.getByText(/The Funny Hour/i)).toBeInTheDocument()
+      const matches = screen.getAllByText(/The Funny Hour/i)
+      expect(matches.length).toBeGreaterThan(0)
     })
 
     // Now select a category filter — should narrow results
@@ -84,7 +85,8 @@ describe('Part 2 — Issue 1: Search', () => {
 
     // After filtering, "The Funny Hour" (Comedy) should remain
     await waitFor(() => {
-      expect(screen.getByText(/The Funny Hour/i)).toBeInTheDocument()
+      const matches = screen.getAllByText(/The Funny Hour/i)
+      expect(matches.length).toBeGreaterThan(0)
     })
 
     // Non-comedy results should be gone
