@@ -15,7 +15,8 @@ describe('Part 1: Smoke Tests', () => {
     // At least one podcast title should appear after loading
     await waitFor(
       () => {
-        expect(screen.getByText(/Byte Talk/i)).toBeInTheDocument()
+        const matches = screen.getAllByText(/Byte Talk/i)
+        expect(matches.length).toBeGreaterThan(0)
       },
       { timeout: 5000 },
     )
@@ -26,13 +27,15 @@ describe('Part 1: Smoke Tests', () => {
 
     await waitFor(
       () => {
-        expect(screen.getByText(/Byte Talk/i)).toBeInTheDocument()
+        const matches = screen.getAllByText(/Byte Talk/i)
+        expect(matches.length).toBeGreaterThan(0)
       },
       { timeout: 5000 },
     )
 
     // Should show more than one podcast
-    expect(screen.getByText(/Zero Day/i)).toBeInTheDocument()
+    const zeroDay = screen.getAllByText(/Zero Day/i)
+    expect(zeroDay.length).toBeGreaterThan(0)
   })
 
   it('shows podcast detail with episodes when navigating to /podcasts/pod-1', async () => {
@@ -41,7 +44,8 @@ describe('Part 1: Smoke Tests', () => {
     // Should show podcast info
     await waitFor(
       () => {
-        expect(screen.getByText(/Byte Talk/i)).toBeInTheDocument()
+        const matches = screen.getAllByText(/Byte Talk/i)
+        expect(matches.length).toBeGreaterThan(0)
       },
       { timeout: 5000 },
     )
