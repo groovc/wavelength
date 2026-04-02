@@ -6,26 +6,23 @@ Add a search page at `/search` that lets users find podcasts and episodes by tex
 
 ## Requirements
 
-- Search input where users can type a query
-- Results update as the user types (or on submit — your choice)
-- Results show matching podcasts and episodes
-- Category filter to narrow results to a specific category
-- Empty/no-results state when nothing matches
+- Users can search for podcasts and episodes by entering text
+- Users can filter search results by category
+- The app shows appropriate feedback when no results are found
+- Search results display both podcasts and episodes
 
 ## API
 
-`GET /api/search?q=<query>&category=<optional>`
-
-Returns `{ podcasts: [...], episodes: [...] }`. Each episode includes its parent `podcast` object.
+The backend supports text-based search with optional category filtering. Check `src/api/client.ts` to understand the available search capabilities.
 
 ## Acceptance Criteria
 
-Your implementation must include:
+Read `src/__tests__/search.test.tsx` to understand what the tests expect. Your implementation should:
 
-1. A search input — use either `<input type="search">` (which has ARIA role `searchbox`) or an `<input>` with `placeholder` containing the word "search" (case-insensitive)
-2. A category filter `<select>` element with `data-testid="category-filter"` — options should include category names as values
-3. A "No results" message when the search returns empty results (must contain the text "no results", case-insensitive)
-4. Search results should display podcast titles and episode titles as visible text
+1. Allow users to enter search text
+2. Allow users to filter by category
+3. Display search results for both podcasts and episodes
+4. Show appropriate feedback when searches return no results
 
 ## Files
 
@@ -35,7 +32,8 @@ Your implementation must include:
 ## Approach
 
 1. Read the test file to understand what's expected
-2. Update `SPEC.md` with the search feature's requirements and API details
-3. Update `PROMPT.md` with guidance for your AI (including the acceptance criteria above)
-4. Use your AI assistant to implement
-5. Run `npm run test:search` and iterate
+2. Explore `src/api/client.ts` to understand the search API
+3. Update `SPEC.md` with the search feature's requirements and API details
+4. Update `PROMPT.md` with guidance for your AI
+5. Use your AI assistant to implement
+6. Run `npm run test:search` and iterate

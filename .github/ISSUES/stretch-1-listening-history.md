@@ -12,60 +12,19 @@ The server already initializes a SQLite database (`better-sqlite3`) with `podcas
 
 ### Backend
 
-1. **`POST /api/history`** — Upsert listening progress
+1. **Track listening progress** — Allow the app to save which episodes users have listened to, how far they progressed, and whether they completed the episode
 
-   Request body:
-   ```json
-   { "episodeId": "ep-101", "podcastId": "pod-1", "progress": 1200, "completed": false }
-   ```
+2. **Retrieve listening history** — Provide listening history with full episode and podcast details (not just IDs)
 
-   - If an entry for this `episodeId` already exists, update it (upsert)
-   - Return the full entry with joined episode + podcast data (see GET response shape)
-
-2. **`GET /api/history`** — Get listening history with episode + podcast details
-
-   Response:
-   ```json
-   {
-     "history": [
-       {
-         "episodeId": "ep-101",
-         "podcastId": "pod-1",
-         "progress": 1200,
-         "completed": false,
-         "updatedAt": "2026-03-30T10:00:00Z",
-         "episodeTitle": "React Server Components Deep Dive",
-         "episodeDuration": 3420,
-         "podcastTitle": "Byte Talk",
-         "podcastImageUrl": "https://placehold.co/...",
-         "podcastAuthor": "Sam Chen & Mia Torres"
-       }
-     ]
-   }
-   ```
-
-   **This requires a SQL JOIN** across all three tables:
-   ```sql
-   SELECT h.episode_id, h.podcast_id, h.progress, h.completed, h.updated_at,
-          e.title AS episode_title, e.duration AS episode_duration,
-          p.title AS podcast_title, p.image_url AS podcast_image_url, p.author AS podcast_author
-   FROM listening_history h
-   JOIN episodes e ON h.episode_id = e.id
-   JOIN podcasts p ON h.podcast_id = p.id
-   ORDER BY h.updated_at DESC
-   LIMIT 10
-   ```
-
-   Note: The database uses `snake_case` column names. The API response should use `camelCase` field names (map them in your endpoint code).
+   The database schema already includes `podcasts`, `episodes`, and `listening_history` tables. See `server/db.ts` for the schema. You'll need to join across tables to get complete data.
 
 ### Frontend
 
 3. **"Continue Listening" section** on the home page
 
-   - Fetch from `GET /api/history` on page load
-   - Display a "Continue Listening" heading/section above the main podcast listings (only if there's history)
-   - Show episode title, podcast name, and some progress indication
-   - This section is only visible when the user has listening history
+   - Display recently listened episodes
+   - Show episode title, podcast name, and progress information
+   - This section should only appear when there is listening history
 
 ## Database Schema (already created)
 
@@ -92,16 +51,18 @@ The `podcasts` and `episodes` tables are already populated with data from `serve
 
 ## Acceptance Criteria
 
-1. `GET /api/history` returns an array of history entries with **joined** episode and podcast data (not just IDs)
-2. `POST /api/history` accepts `episodeId`, `podcastId`, `progress`, and optional `completed` — performs an upsert
-3. The home page shows a "Continue Listening" heading (text must contain "continue listening", case-insensitive) when there is history
-4. In-progress episodes display their episode title and podcast name
+Read `src/__tests__/history.test.tsx` to understand what the tests expect. Your implementation should:
+
+1. Allow saving listening progress for episodes
+2. Retrieve listening history with complete episode and podcast information
+3. Display a "Continue Listening" section on the home page when there is history
+4. Show episode titles and podcast names for in-progress episodes
 
 ## Approach
 
 1. Read the test file to understand what's expected
 2. Read `server/db.ts` to understand the database schema
-3. Update `SPEC.md` with the new API endpoints and response schemas
-4. Update `PROMPT.md` with backend implementation guidance (SQLite, JOIN query, snake_case → camelCase mapping)
+3. Update `SPEC.md` with the new API endpoints and functionality
+4. Update `PROMPT.md` with implementation guidance for your AI
 5. Use your AI assistant to implement both the backend endpoints and frontend component
 6. Run `npm run test:history` and iterate

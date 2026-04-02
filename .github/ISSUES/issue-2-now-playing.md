@@ -6,26 +6,23 @@ Add a persistent "Now Playing" bar that appears when a user plays an episode. Th
 
 ## Requirements
 
-- Each episode in the podcast detail page should have a play button
-- Clicking play shows a persistent bar at the bottom of the viewport
-- The bar displays the episode title and podcast name
-- The bar includes a play/pause toggle
-- The bar remains visible when navigating between pages (it lives outside the route content)
+- Users can start playing an episode from the podcast detail page
+- The app shows what's currently playing
+- Users can pause and resume playback
+- The playing state persists when navigating between pages
 
 ## State Management
 
-This feature is entirely client-side — no API calls needed. The "Now Playing" state (which episode is playing, play/pause status) should be managed in React state that lives above the router so it persists across navigation.
+This feature is entirely client-side — no API calls needed. The current playback state should persist across navigation.
 
 ## Acceptance Criteria
 
-Your implementation must include:
+Read `src/__tests__/player.test.tsx` to understand what the tests expect. Your implementation should:
 
-1. A play button on each episode with `data-testid="play-{episodeId}"` (e.g., `data-testid="play-ep-101"`)
-2. A Now Playing bar with `data-testid="now-playing"` that appears after clicking a play button
-3. The Now Playing bar must contain the episode title and podcast name as visible text
-4. A play/pause button inside the Now Playing bar (either `data-testid="play-pause"` or any `<button>` element inside the bar)
-5. The Now Playing bar must include a link to `/` (home) so the persistence test can navigate away and verify the bar remains
-6. The Now Playing bar persists when the user navigates to a different page
+1. Allow users to play episodes from the podcast detail page
+2. Show which episode is currently playing
+3. Allow users to toggle between play and pause states
+4. Maintain playback state when navigating to different pages
 
 ## Files
 
@@ -37,6 +34,6 @@ Your implementation must include:
 
 1. Read the test file to understand what's expected
 2. Update `SPEC.md` with the Now Playing feature requirements
-3. Update `PROMPT.md` with state management guidance and the test ID conventions above
+3. Update `PROMPT.md` with state management guidance for your AI
 4. Use your AI assistant to implement
 5. Run `npm run test:player` and iterate
